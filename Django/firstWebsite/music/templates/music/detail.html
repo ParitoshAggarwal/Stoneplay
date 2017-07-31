@@ -1,0 +1,25 @@
+{% extends 'music/base.html' %}
+{% block title %}Album Details{% endblock %}
+{% block body %}
+    <img src="{{album.album_logo}}">
+    <h1>{{album.album_title}}</h1>
+    <h2>{{album.artists}}</h2>
+
+    {% if error_message %}
+    <h3>Something Went Wrong</h3>
+    {% endif %}
+
+    <form action="{% url 'music:favourite' album.id %}" method="post">
+        {% csrf_token %}
+        {% for song in album.songs_set.all %}
+            <input type="radio" name="song" value="{{song.id}}">
+            <label >
+                {{song.song_title}}
+                {% if song.is_favourite %}
+                    <img src="http://findicons.com/files/icons/1620/crystal_project/22/knewstuff.png">
+                {% endif %}
+            </label><br>
+        {% endfor %}
+        <input type="submit" name="fav">
+    </form>
+{% endblock %}
