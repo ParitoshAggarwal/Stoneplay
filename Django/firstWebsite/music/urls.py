@@ -24,4 +24,10 @@ urlpatterns =[
     #music/album/delete/6
     url(r'^delete/album/(?P<pk>[0-9]+)/$',views.AlbumDelete.as_view(),name="albumdelete"),
 
+    #music/album/6/songadd
+    url(r'^album/(?P<album_id>[0-9]+)/songadd/$',views.SongsCreate.as_view(),name="addsong"),
+
+    #music/album/6/songdelete/3   url(r'^album/(?P<album_id>[0-9]+)/delete/song/(?P<pk>[0-9]+)/$',views.SongsDelete.as_view(),name="deletesong"),
+    # url(r'^delete/song/(?P<pk>[0-9]+)/$',views.SongsDelete.as_view(),name="deletesong"),
+    url(r'^album/(?P<album_id>[0-9]+)/delete/song/(?P<pk>[0-9]+)/$',views.SongsDelete,name="deletesong"),
 ]

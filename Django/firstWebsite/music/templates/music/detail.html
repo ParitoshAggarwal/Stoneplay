@@ -62,7 +62,7 @@
 
             <ul class="nav nav-pills" style="margin-bottom: 10px;">
                 <li role="presentation" class="active"><a href="{% url 'music:detail' album.id %}">View All</a></li>
-                <li role="presentation"><a href="#">Add New Song</a></li>
+                <li role="presentation"><a href="{% url 'music:addsong' album.id %}">Add New Song</a></li>
             </ul>
 
             <div class="panel panel-default">
@@ -88,8 +88,9 @@
                             <tr>
                                 <td>{{ song.song_title }}</td>
                                 <td>
-                                    <a target="_blank" href="#">
-                                        <button type="button" class="btn btn-success btn-xs">
+                                    <a target="_blank">
+                                        <button type="button" class="btn btn-success btn-xs" onclick="play()">
+                                            <audio id="audio" src={{ song.song_file.url }}></audio>
                                             <span class="glyphicon glyphicon-play"></span>&nbsp; Play
                                         </button>
                                     </a>
@@ -98,12 +99,12 @@
                                     <a href="#" class="btn-favorite"><span class="glyphicon glyphicon-star {% if song.is_favourite %}active{% endif %}"></span></a>
                                 </td>
                                 <td>
-                                    <form action="#" method="post" style="display: inline;">
+                                    <form action="{%  url 'music:deletesong' album.id song.id%}" method="post" style="display: inline;">
                                         {% csrf_token %}
                                         <input type="hidden" name="song_id" value="{{ song.id }}" />
                                         <button type="submit" class="btn btn-danger btn-xs">
                                             <span class="glyphicon glyphicon-remove"></span>&nbsp; Delete
-                                        </button>
+                                        </button>`
                                     </form>
                                 </td>
                             </tr>
@@ -119,6 +120,11 @@
     </div>
 
 </div>
-
+<script>
+  function play(){
+       var audio = document.getElementById("audio");
+       audio.play();
+                 }
+   </script>
 {% endblock %}
 

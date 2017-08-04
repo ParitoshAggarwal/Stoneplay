@@ -33,9 +33,10 @@
 # #         selected_song.save()
 # #         return render(request, "music/detail.html", {'album': album})
 from django.views import generic
-from . models import Album
+from . models import Album,Songs
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.core.urlresolvers import reverse_lazy
+from django.shortcuts import render
 
 class IndexView(generic.ListView):
     template_name = 'music/index.html'
@@ -60,3 +61,19 @@ class AlbumUpdate(UpdateView):
 class AlbumDelete(DeleteView):
     model = Album
     success_url = reverse_lazy('music:index')
+
+class SongsCreate(CreateView):
+    model = Songs
+    fields = ['album','song_title','file_type','song_file','is_favourite']
+
+# class SongsDelete(DeleteView):
+#     model = Album
+#     success_url = reverse_lazy('music:index')
+
+def SongsDelete(request,album_id,pk):
+    album = Album.objects.get(pk = album_id)
+    selected_song = album.songs_set.get(pk=pk)
+    selected_song.delete()
+    album.save()
+    return render(request , "music/detail.html", {'album':album} )
+
