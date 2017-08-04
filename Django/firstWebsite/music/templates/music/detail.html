@@ -89,8 +89,8 @@
                                 <td>{{ song.song_title }}</td>
                                 <td>
                                     <a target="_blank">
-                                        <button type="button" class="btn btn-success btn-xs" onclick="play()">
-                                            <audio id="audio" src={{ song.song_file.url }}></audio>
+                                        <button type="button" class="btn btn-success btn-xs" onclick="play({{ forloop.counter }})">
+                                            <audio id="audio{{ forloop.counter }}" src={{ song.song_file.url }}></audio>
                                             <span class="glyphicon glyphicon-play"></span>&nbsp; Play
                                         </button>
                                     </a>
@@ -99,7 +99,7 @@
                                     <a href="#" class="btn-favorite"><span class="glyphicon glyphicon-star {% if song.is_favourite %}active{% endif %}"></span></a>
                                 </td>
                                 <td>
-                                    <form action="{%  url 'music:deletesong' album.id song.id%}" method="post" style="display: inline;">
+                                    <form action="{%  url 'music:deletesong' album.id song.id %}" method="post" style="display: inline;">
                                         {% csrf_token %}
                                         <input type="hidden" name="song_id" value="{{ song.id }}" />
                                         <button type="submit" class="btn btn-danger btn-xs">
@@ -121,10 +121,21 @@
 
 </div>
 <script>
-  function play(){
-       var audio = document.getElementById("audio");
-       audio.play();
-                 }
+    var p=1;
+    var prev_audio=null;
+
+  function play(forloop_counter){
+      var audio = document.getElementById("audio"+forloop_counter);
+      if(prev_audio!=null)
+        prev_audio.pause();
+      audio.play();
+      if(audio==prev_audio) {
+          audio.pause();
+          prev_audio=null;
+      }
+      else
+         prev_audio=audio;
+  }
    </script>
 {% endblock %}
 

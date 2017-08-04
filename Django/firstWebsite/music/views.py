@@ -73,6 +73,7 @@ class SongsCreate(CreateView):
 def SongsDelete(request,album_id,pk):
     album = Album.objects.get(pk = album_id)
     selected_song = album.songs_set.get(pk=pk)
+    # selected_song.song_file.delete()
     selected_song.delete()
     album.save()
     return render(request , "music/detail.html", {'album':album} )
