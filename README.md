@@ -1,8 +1,8 @@
 # Stoneplay 
 It is your Personalised music library which is indeed shared with others. In this way one can share his/her music interest.
-Backend - Django
-Frontend - HTML5 CSS3 Bootstrap
-Also Used - JavaScript
+Backend - Django <br>
+Frontend - HTML5 ,CSS3 ,Bootstrap <br>
+Also Used - JavaScript <br>
 
 ## Index Page (Main Page)
 The main page contains all album list created by you.
