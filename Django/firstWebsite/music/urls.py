@@ -8,6 +8,8 @@ urlpatterns =[
     #music/
     url(r'^$',views.IndexView.as_view(),name="index"),
 
+    url(r'^register/$',views.UserFormView.as_view(),name="register"),
+
     #mucis/423/
     # url(r'^(?P<album_id>[0-9]+)/$',views.detail,name="detail"),
 
