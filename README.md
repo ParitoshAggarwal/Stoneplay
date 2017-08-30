@@ -1,8 +1,6 @@
  # Stoneplay 
   It is your Personalised music library which is indeed shared with others. In this way one can share his/her music interest.
- -Backend - Django
- -Frontend - HTML5 CSS3 Bootstrap
- -Also Used - JavaScript
+ <br>
  +Backend - Django <br>
  +Frontend - HTML5 ,CSS3 ,Bootstrap <br>
  +Also Used - JavaScript <br>
